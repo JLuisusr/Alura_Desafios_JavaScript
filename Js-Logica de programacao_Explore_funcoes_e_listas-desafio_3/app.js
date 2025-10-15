@@ -1,39 +1,38 @@
 /*Desafios*/
 while (true){
-    let x = prompt('Escolha uma opção de 1 a 6:')
+
+    let x = prompt('Escolha uma opção de 1 a 6:\n 1.Crie uma função que calcule o índice de massa corporal (IMC) de uma pessoa, a partir de sua altura, em metros, e peso, em quilogramas, que serão recebidos como parâmetro.\n \n 2.Crie uma função que calcule o valor do fatorial de um número passado como parâmetro.\n \n 3.Crie uma função que converte um valor em dólar, passado como parâmetro, e retorna o valor equivalente em reais. Para isso, considere a cotação do dólar igual a R$4,80.\n \n 4.Crie uma função que mostre na tela a área e o perímetro de uma sala retangular, utilizando altura e largura que serão dadas como parâmetro.\n \n 5.Crie uma função que mostre na tela a área e o perímetro de uma sala circular, utilizando seu raio que será fornecido como parâmetro. Considere Pi = 3,14.\n \n 6.Crie uma função que mostre na tela a tabuada de um número dado como parâmetro.')
     if (x == 0){break}
 
 
     /*1.Crie uma função que calcule o índice de massa corporal (IMC) de uma pessoa, a partir de sua altura, em metros, e peso, em quilogramas, que serão recebidos como parâmetro.*/
     else if (x == 1){
         function CalcularIMC(altura,peso){
-            let imc = altura / (peso**2)
+            let imc = peso / (altura**2)
             return imc;
         }
-
-
         let altura = prompt ('Digite sua altura em metros:');
         let peso = prompt ('Digite seu peso:');
-        CalcularIMC();
+        console.log(CalcularIMC(altura,peso));
     }
     /*2.Crie uma função que calcule o valor do fatorial de um número passado como parâmetro.*/
     else if (x == 2){
+        function fatorial(){
         let numeroEntrada = prompt('Digite o número para calcular o fatorial: ');
-        let numeroAntecessor = numeroEntrada - 1;
-        let resultadoParcial = numeroEntrada;
+        let resultadoParcial = 1;
 
-        function funcaoFatorial(numero,resultadoParcial){
-            let resultado = numero*resultadoParcial;
-            return resultado;
+        if ( numeroEntrada == 0 || numeroEntrada ==1){
+            return 1;
         }
 
-        while (numeroAntecessor > 1){
-            resultadoParcial = funcaoFatorial(numeroAntecessor,resultadoParcial);
-            numeroAntecessor --;
+        else{
+            for (i=2; i <=numeroEntrada; i++){
+                resultadoParcial *= i;
+            }
         }
 
         alert(`O fatorial de ${numeroEntrada} é igual a ${resultadoParcial}.`)
-
+    } fatorial()
     }
     /*3.Crie uma função que converte um valor em dólar, passado como parâmetro, e retorna o valor equivalente em reais. Para isso, considere a cotação do dólar igual a R$4,80.*/
     else if (x == 3){
@@ -77,17 +76,26 @@ while (true){
 
     /*6.Crie uma função que mostre na tela a tabuada de um número dado como parâmetro.*/
     else if (x == 6){
-        let n = 1;
-        let operador= '+';
-        let resultado = n + numeroDado;
+        let n = 0;
+        let numeroDado = (prompt('Digite um número: '))
+        numeroDado = +(numeroDado.replace(',','.'))
+        console.log(`| Soma | | subtração | Multiplicação | Divisão |`);
+        
+        
 
-        let numeroDado = prompt('Digite um número: ')
-        while (n<11){
-            console.log(`| ${numeroDado} ${operador} ${n} = ${resultado}`)
-            n++;
+        function  operacao(numeroDado,n){
+            let operador = [' + ',' - ',' * ',' / '];
+            let indice = parseInt(n/10);
+            let resultado = numeroDado + operador[indice] + (n %= 10);
+            console.log(n %= 10);
+            return resultado;
+        }      
+        
+        while (n<40){
+            let resultadoOperacional = operacao(numeroDado,n)
+            console.log(`| ${resultadoOperacional} = ${eval(resultadoOperacional).toFixed(2)}|`)
+            n++; 
         }
-
-        function tabuada(){}
     }
 
     else{alert('Opção invalida')}
